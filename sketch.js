@@ -17,31 +17,25 @@ function preload() {
 
 }
 
-function setup() {
-  var canvas = createCanvas(480, 800);
-  engine = Engine.create();
-  world = engine.world;
-  
-  ground1=new Ground(470, 400, 900, 20);
-
-  ground2=new Ground();
-  ground3=new Ground();
-  
-
-
-}
-
 var particles = [];
 var plinkos = [];
 var divisions = [];
 
 var divisionHeight=300;
 
-function draw() {
-  background(canvas); 
+function setup() {
+  var canvas = createCanvas(480, 800);
+  engine = Engine.create();
+  world = engine.world;
   
+  ground1=new Ground(240, 798, 480, 20);
+
+  //ground2=new Ground();
+  //ground3=new Ground();
+  
+
   for (var k = 0; k<=width; k = k+80) {
-    divisions.push(new Divisions(k, height-divisionHeight/2, 10, divisionHeight));
+    divisions.push(new Divider(k, height-divisionHeight/2, 10, divisionHeight));
   }
 
   for (var j = 40; j<=width; j=j+50) {
@@ -52,6 +46,29 @@ function draw() {
     plinkos.push(new Plinko(j,175));
   }
 
+  for (var j = 15; j<=width-10; j=j+50) {
+    plinkos.push(new Plinko(j, 375));
+  }
+
+  for (var j = 40; j <=width; j=j+50) {
+    plinkos.push(new Plinko(j,275));
+  }
+  
+
+  if(frameCount%60===0) {
+    particles.push(new Particle(random(width/2-10, width/2+10), 10, 10));
+  }
+}
+
+
+
+function draw() {
+  background(canvas); 
+  
+  if(frameCount%20 === 0) {
+    particles.push(new Particle(random(width/2-10, width/2+10), 10, 10));
+  }
+
   for (var j = 0; j < particles.length; j++) {
     particles[j].display();
   }
@@ -60,38 +77,38 @@ function draw() {
     divisions[k].display();
   }
 
-  if(frameCount%60===0) {
-    particles.push(new Particle(random(width/2-10, width/2+10), 10, 10));
+  for (var j = 0; j < plinkos.length; j++) {
+    plinkos[j].display();
   }
 
   ground1.display();
 
-  divider1.display();
-  divider2.display();
-  divider3.display();
-  divider4.display();
-  divider5.display();
-  divider6.display();
-  divider7.display();
+  //divider1.display();
+  //divider2.display();
+  //divider3.display();
+  //divider4.display();
+  //divider5.display();
+  //divider6.display();
+  //divider7.display();
 
-  plinko1.display();
-  plinko2.display();
-  plinko3.display();
-  plinko4.display();
-  plinko5.display();
-  plinko6.display();
-  plinko7.display();
-  plinko8.display();
-  plinko9.display();
-  plinko11.display();
-  plinko12.display();
-  plinko13.display();
-  plinko14.display();
+  //plinko1.display();
+  //plinko2.display();
+  //plinko3.display();
+  //plinko4.display();
+  //plinko5.display();
+  //plinko6.display();
+  //plinko7.display();
+  //plinko8.display();
+  //plinko9.display();
+  //plinko11.display();
+  //plinko12.display();
+  //plinko13.display();
+  //plinko14.display();
 
-  particle1.display();
-  particle2.display();
-  particle3.display();
-  particle4.display();
+  //particle1.display();
+  //particle2.display();
+  //particle3.display();
+  //particle4.display();
 
   drawSprites();
 }
